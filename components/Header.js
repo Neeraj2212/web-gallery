@@ -1,4 +1,3 @@
-import React from "react";
 import { Nav, Navbar, Button } from "react-bootstrap";
 import { signIn, signOut, useSession } from "next-auth/client";
 
@@ -19,7 +18,7 @@ export default function Header() {
 									signIn();
 								}}
 							>
-								<Button className="ml-auto" variant="dark">
+								<Button className="ml-auto " variant="dark">
 									Sign in
 								</Button>
 							</a>
