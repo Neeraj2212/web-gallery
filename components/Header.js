@@ -10,6 +10,9 @@ export default function Header() {
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="ml-auto">
+						<Nav.Link href="/">Home</Nav.Link>
+
+						<Nav.Link href="/hiddenfiles">Hidden files</Nav.Link>
 						{!session && (
 							<a
 								href="/api/auth/signin"

@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
 import Header from "./../components/Header";
-
 import ImageView from "./../components/imagesView";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
-export default function Home() {
-	const router = useRouter();
+export default function HiddenFiles() {
 	const [files, setFiles] = useState([]);
 
 	useEffect(() => {
 		loadData();
-		router.prefetch("/hiddenfiles");
 	}, []);
 
 	const loadData = async () => {
@@ -19,14 +14,13 @@ export default function Home() {
 		setFiles(resfiles);
 	};
 
-	console.log("Files loaded " + files.length);
 	return (
 		<div>
 			<Header />
 			<ImageView
-				type="Hide"
-				property="true"
-				files={files.filter((file) => file.properties.hidden === "false")}
+				type="Unhide"
+				property="false"
+				files={files.filter((file) => file.properties.hidden === "true")}
 			/>
 		</div>
 	);
