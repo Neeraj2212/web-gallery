@@ -13,8 +13,10 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "googleapis": "39",
+    "multer": "^1.4.2",
     "next": "10.0.4",
     "next-auth": "^3.1.0",
+   
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Head from "next/head";
 import Header from "./../components/Header";
-
+import UploadFiles from "../components/UploadFile";
 import ImageView from "./../components/imagesView";
 import { useRouter } from "next/router";
 
@@ -28,6 +27,15 @@ export default function Home() {
 				property="true"
 				files={files.filter((file) => file.properties.hidden === "false")}
 			/>
+			<div
+				style={{
+					position: `fixed`,
+					bottom: `25px`,
+					right: `25px`,
+				}}
+			>
+				<UploadFiles />
+			</div>
 		</div>
 	);
 }

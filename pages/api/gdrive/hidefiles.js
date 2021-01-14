@@ -14,7 +14,7 @@ export default function hideMyFiles(request, response) {
 						},
 					},
 				});
-				console.log(result.data);
+
 				response.json(result.data);
 			});
 		} catch (error) {
