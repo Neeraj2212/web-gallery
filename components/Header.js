@@ -6,7 +6,12 @@ export default function Header() {
 	const router = useRouter();
 	return (
 		<div className="container">
-			<Navbar collapseOnSelect expand="md" variant="light">
+			<Navbar
+				collapseOnSelect
+				expand="md"
+				variant="light"
+				style={{ paddingRight: 0, paddingLeft: 0 }}
+			>
 				<Navbar.Brand href="#home">Web Gallary</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">

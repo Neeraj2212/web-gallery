@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FormCheck, Button } from "react-bootstrap";
 import { useState } from "react";
+import { useSession } from "next-auth/client";
 
 function ImageComponent({
 	file,
@@ -41,8 +42,12 @@ function ImageComponent({
 							);
 						}
 					}}
-					style={{ position: `absolute`, right: "25px", bottom: "25px" }}
-				></FormCheck>
+					style={{
+						position: `absolute`,
+						right: "35px",
+						bottom: "25px",
+					}}
+				/>
 			) : (
 				<div></div>
 			)}
@@ -51,6 +56,7 @@ function ImageComponent({
 }
 
 export default function ImageView(props) {
+	const [session, loading] = useSession();
 	const [showTicks, setTicks] = useState(false);
 	const [hideFiles, btnHide] = useState(false);
 	const [deleteFiles, btnDelete] = useState(false);
@@ -74,7 +80,7 @@ export default function ImageView(props) {
 						<div></div>
 					)}
 
-					{!hideFiles ? (
+					{session && !hideFiles ? (
 						<Button
 							variant="outline-danger"
 							onClick={() => {
@@ -89,7 +95,7 @@ export default function ImageView(props) {
 					)}
 				</div>
 				{showTicks && hideFiles ? (
-					<div className=" ml-auto">
+					<div className=" ml-auto mr-3">
 						<Button
 							variant="success"
 							onClick={async () => {
@@ -120,8 +126,8 @@ export default function ImageView(props) {
 				) : (
 					<div></div>
 				)}
-				{showTicks && deleteFiles ? (
-					<div className=" ml-auto">
+				{session && showTicks && deleteFiles ? (
+					<div className=" ml-auto mr-3">
 						<Button
 							variant="danger"
 							onClick={() => {
