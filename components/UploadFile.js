@@ -4,6 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 export default function UploadFiles() {
 	const [show, setShow] = useState(false);
 	const [acceptedFiles, setAcceptedFiles] = useState([]);
+	const [isLoading, setLoading] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -15,11 +16,11 @@ export default function UploadFiles() {
 		}
 		fetch("/api/gdrive/uploadfiles", {
 			method: "POST",
-
 			body: data,
 		})
 			.then(async (res) => {
-				console.log(res);
+				alert(await res.text());
+				location.reload();
 			})
 			.catch((error) => {
 				console.log(error);
@@ -31,7 +32,7 @@ export default function UploadFiles() {
 			<Button
 				variant="primary"
 				onClick={handleShow}
-				style={{ borderRadius: `50px`, fontSize: `1.5rem` }}
+				style={{ borderRadius: `50px`, fontSize: `1.3rem` }}
 			>
 				Upload
 			</Button>
@@ -50,7 +51,14 @@ export default function UploadFiles() {
 							}}
 						/>
 						<div className="mt-2 d-flex justify-content-end">
-							<Button type="submit">Upload</Button>
+							<Button
+								type="submit"
+								onClick={() => {
+									setLoading(true);
+								}}
+							>
+								{isLoading ? "Uploading ..." : "Upload"}
+							</Button>
 						</div>
 					</Form>
 				</Modal.Body>

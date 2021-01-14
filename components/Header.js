@@ -1,15 +1,16 @@
 import { Nav, Navbar, Button } from "react-bootstrap";
 import { signIn, signOut, useSession } from "next-auth/client";
-
+import { useRouter } from "next/router";
 export default function Header() {
 	const [session, loading] = useSession();
+	const router = useRouter();
 	return (
 		<div className="container">
 			<Navbar collapseOnSelect expand="md" variant="light">
 				<Navbar.Brand href="#home">Web Gallary</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="ml-auto">
+					<Nav activeKey={router.pathname} className="ml-auto">
 						<Nav.Link href="/">Home</Nav.Link>
 
 						<Nav.Link href="/hiddenfiles">Hidden files</Nav.Link>

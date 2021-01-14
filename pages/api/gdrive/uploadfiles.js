@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 import multer from "multer";
-import fs from "fs";
+
 import stream from "stream";
 export const config = {
 	api: {
@@ -19,9 +19,9 @@ const upload = multer();
 // 	});
 // }
 
-export default function UploadFiles(request, response) {
+export default async function UploadFiles(request, response) {
 	if (request.method === "POST") {
-		upload.array("files")(request, response, (result) => {
+		upload.array("files")(request, response, async (result) => {
 			if (result instanceof Error) {
 				return console.log(result);
 			}
@@ -29,40 +29,31 @@ export default function UploadFiles(request, response) {
 			const drive = google.drive({ version: "v3" });
 			const files = request.files;
 
-			files.forEach(async (file) => {
+			for (let index = 0; index < files.length; index++) {
+				const file = files[index];
 				const bufferStream = new stream.PassThrough();
 				bufferStream.end(file.buffer);
-				var fileMetaData = {
-					name: file.originalname,
-					parents: "1LkDx99HV8dHmRjzXbmDYnH3wY5hty28V",
-				};
+
 				var media = {
 					mimeType: file.mimetype,
 					body: bufferStream,
 				};
-
-				drive.files.create(
-					{
-						requestBody: {
-							name: file.originalname,
-							parents: ["1LkDx99HV8dHmRjzXbmDYnH3wY5hty28V"],
-							properties: {
-								hidden: "false",
-							},
+				const driveRes = await drive.files.create({
+					requestBody: {
+						name: file.originalname,
+						parents: ["1LkDx99HV8dHmRjzXbmDYnH3wY5hty28V"],
+						properties: {
+							hidden: "false",
 						},
-						media: media,
-						fields: "*",
 					},
-					function (err, file) {
-						if (err) {
-							// Handle error
-							console.error(err);
-						} else {
-							console.log("File Id:", file.id);
-						}
-					}
-				);
-			});
+					media: media,
+					fields: "id,name",
+				});
+				console.log(driveRes.data);
+			}
+
+			console.log("Sending Response");
+			response.send("Upload Sucessfull");
 		});
 
 		// runmiddleware(request, response);
