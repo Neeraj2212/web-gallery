@@ -34,10 +34,7 @@ export default async function UploadFiles(request, response) {
 					const driveRes = await drive.files.create({
 						requestBody: {
 							name: file.originalname,
-							parents: ["1LkDx99HV8dHmRjzXbmDYnH3wY5hty28V"],
-							properties: {
-								hidden: "false",
-							},
+							parents: ["1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM"],
 						},
 						media: media,
 						fields: "id,name",

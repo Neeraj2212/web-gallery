@@ -1,5 +1,5 @@
 import Header from "./../components/Header";
-import ImageView from "./../components/imagesView";
+import HiddenImageView from "./../components/hiddenImageView";
 import { useState, useEffect } from "react";
 
 export default function HiddenFiles() {
@@ -10,18 +10,14 @@ export default function HiddenFiles() {
 	}, []);
 
 	const loadData = async () => {
-		const resfiles = await (await fetch("api/gdrive/gdrive-api")).json();
+		const resfiles = await (await fetch("api/gdrive/list-hidden-files")).json();
 		setFiles(resfiles);
 	};
 
 	return (
 		<div>
 			<Header />
-			<ImageView
-				type="Unhide"
-				property="false"
-				files={files.filter((file) => file.properties.hidden === "true")}
-			/>
+			<HiddenImageView files={files} />
 		</div>
 	);
 }

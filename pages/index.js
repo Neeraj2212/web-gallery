@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import UploadFiles from "../components/UploadFile";
-import ImageView from "./../components/imagesView";
+import ImageView from "./../components/homeImageView";
 import { useRouter } from "next/router";
 import { useSession, getSession } from "next-auth/client";
 
@@ -24,11 +24,7 @@ export default function Home() {
 	return (
 		<div>
 			<Header />
-			<ImageView
-				type="Hide"
-				property="true"
-				files={files.filter((file) => file.properties.hidden === "false")}
-			/>
+			<ImageView files={files} />
 			{session && (
 				<div
 					style={{

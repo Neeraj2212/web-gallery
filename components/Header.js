@@ -19,6 +19,7 @@ export default function Header() {
 						<Nav.Link href="/">Home</Nav.Link>
 
 						<Nav.Link href="/hiddenfiles">Hidden files</Nav.Link>
+						<Nav.Link href="/archivedfiles">Archived files</Nav.Link>
 						{!session && (
 							<a
 								href="/api/auth/signin"

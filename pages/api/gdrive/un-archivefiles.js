@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 
-export default function hideMyFiles(request, response) {
+export default function unarchivefiles(request, response) {
 	if (request.method === "PUT") {
 		const drive = google.drive({ version: "v3" });
 		const files = request.body;
@@ -8,11 +8,12 @@ export default function hideMyFiles(request, response) {
 			files.map(async (file) => {
 				const result = await drive.files.update({
 					fileId: file,
-					addParents: "1CDG7aTbenX-kMK9Ar77aPJsrWpQTi8Ed", // Moving files from general to hidden folder
-					removeParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", // general folder id
+					addParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", //   Moving files from archive to general folder
+					removeParents: "1457wU7ZikBzk-0AufwhWaXGMzhZcfimU", // arhieve folder id
 				});
 
-				response.json("Files Hidden Successfully");
+				// console.log(result.data);
+				response.json("Files restored Successfully");
 			});
 		} catch (error) {
 			response.status(400).json(error);

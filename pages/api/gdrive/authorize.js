@@ -15,7 +15,7 @@ export const authorize = () => {
 
 	if (TOKEN_PATH) {
 		oAuth2Client.setCredentials(TOKEN_PATH);
-		google.options({ auth: oAuth2Client });
+		google.options({ auth: oAuth2Client }); // setting auth for future requests
 	} else {
 		return getAccessToken(oAuth2Client);
 	}
