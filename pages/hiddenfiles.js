@@ -1,8 +1,10 @@
 import Header from "./../components/Header";
 import HiddenImageView from "./../components/hiddenImageView";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/client";
 
 export default function HiddenFiles() {
+	const [session, loading] = useSession();
 	const [files, setFiles] = useState([]);
 
 	useEffect(() => {
@@ -15,9 +17,13 @@ export default function HiddenFiles() {
 	};
 
 	return (
-		<div>
-			<Header />
-			<HiddenImageView files={files} />
-		</div>
+		<>
+			{session && (
+				<div>
+					<Header />
+					<HiddenImageView files={files} />
+				</div>
+			)}
+		</>
 	);
 }

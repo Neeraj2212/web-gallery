@@ -17,9 +17,13 @@ export default function Header() {
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav activeKey={router.pathname} className="ml-auto">
 						<Nav.Link href="/">Home</Nav.Link>
+						{session && (
+							<>
+								<Nav.Link href="/hiddenfiles">Hidden files</Nav.Link>
+								<Nav.Link href="/archivedfiles">Archived files</Nav.Link>
+							</>
+						)}
 
-						<Nav.Link href="/hiddenfiles">Hidden files</Nav.Link>
-						<Nav.Link href="/archivedfiles">Archived files</Nav.Link>
 						{!session && (
 							<a
 								href="/api/auth/signin"

@@ -1,8 +1,11 @@
 import { google } from "googleapis";
+import { getSession } from "next-auth/client";
 
 export default function archivefiles(request, response) {
 	if (request.method === "PUT") {
-		const drive = google.drive({ version: "v3" });
+		const session = await getSession({ req: request });
+		if (session) {
+			const drive = google.drive({ version: "v3" });
 		const files = request.body;
 		try {
 			files.map(async (file) => {
@@ -18,5 +21,9 @@ export default function archivefiles(request, response) {
 		} catch (error) {
 			response.status(400).json(error);
 		}
+		} else {
+			response.status(401);
+		}
+		
 	}
 }

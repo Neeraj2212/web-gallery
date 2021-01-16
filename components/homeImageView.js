@@ -36,87 +36,91 @@ export default function ImageView(props) {
 	return (
 		<div className="container">
 			<div className="row">
-				<div className="mr-auto ml-3">
-					<Button
-						variant="outline-warning"
-						disabled={deleteFiles || archiveFiles}
-						className="mr-1"
-						onClick={() => {
-							setTicks(!showTicks);
-							btnHide(!hideFiles);
-							setSelectedFiles([]);
-						}}
-					>
-						Hide
-					</Button>
+				{session && (
+					<>
+						<div className="mr-auto ml-3">
+							<Button
+								variant="outline-warning"
+								disabled={deleteFiles || archiveFiles}
+								className="mr-1"
+								onClick={() => {
+									setTicks(!showTicks);
+									btnHide(!hideFiles);
+									setSelectedFiles([]);
+								}}
+							>
+								Hide
+							</Button>
 
-					<Button
-						variant="outline-danger"
-						className="mx-1"
-						disabled={hideFiles || archiveFiles}
-						onClick={() => {
-							setTicks(!showTicks);
-							setSelectedFiles([]);
-							btnDelete(!deleteFiles);
-						}}
-					>
-						Delete
-					</Button>
+							<Button
+								variant="outline-danger"
+								className="mx-1"
+								disabled={hideFiles || archiveFiles}
+								onClick={() => {
+									setTicks(!showTicks);
+									setSelectedFiles([]);
+									btnDelete(!deleteFiles);
+								}}
+							>
+								Delete
+							</Button>
 
-					<Button
-						variant="outline-dark"
-						className="mx-1"
-						disabled={hideFiles || deleteFiles}
-						onClick={() => {
-							setTicks(!showTicks);
-							setSelectedFiles([]);
-							btnArchive(!archiveFiles);
-						}}
-					>
-						Archive
-					</Button>
-				</div>
-				{showTicks && hideFiles ? (
-					<div className=" ml-auto mr-3">
-						<Button
-							variant="success"
-							onClick={() => {
-								HandleEdits("/api/gdrive/hidefiles", "PUT");
-							}}
-						>
-							{isLoading ? "Hiding .." : "Hide Selected"}
-						</Button>
-					</div>
-				) : (
-					<div></div>
-				)}
-				{showTicks && deleteFiles ? (
-					<div className=" ml-auto mr-3">
-						<Button
-							variant="danger"
-							onClick={() => {
-								HandleEdits("/api/gdrive/deletefiles", "DELETE");
-							}}
-						>
-							{isLoading ? "Deleting .." : "Delete Selected"}
-						</Button>
-					</div>
-				) : (
-					<div></div>
-				)}
-				{showTicks && archiveFiles ? (
-					<div className=" ml-auto mr-3">
-						<Button
-							variant="dark"
-							onClick={async () => {
-								HandleEdits("/api/gdrive/archivefiles", "PUT");
-							}}
-						>
-							{isLoading ? "Archiving .." : "Archive Selected"}
-						</Button>
-					</div>
-				) : (
-					<div></div>
+							<Button
+								variant="outline-dark"
+								className="mx-1"
+								disabled={hideFiles || deleteFiles}
+								onClick={() => {
+									setTicks(!showTicks);
+									setSelectedFiles([]);
+									btnArchive(!archiveFiles);
+								}}
+							>
+								Archive
+							</Button>
+						</div>
+						{showTicks && hideFiles ? (
+							<div className=" ml-auto mr-3">
+								<Button
+									variant="success"
+									onClick={() => {
+										HandleEdits("/api/gdrive/hidefiles", "PUT");
+									}}
+								>
+									{isLoading ? "Hiding .." : "Hide Selected"}
+								</Button>
+							</div>
+						) : (
+							<div></div>
+						)}
+						{showTicks && deleteFiles ? (
+							<div className=" ml-auto mr-3">
+								<Button
+									variant="danger"
+									onClick={() => {
+										HandleEdits("/api/gdrive/deletefiles", "DELETE");
+									}}
+								>
+									{isLoading ? "Deleting .." : "Delete Selected"}
+								</Button>
+							</div>
+						) : (
+							<div></div>
+						)}
+						{showTicks && archiveFiles ? (
+							<div className=" ml-auto mr-3">
+								<Button
+									variant="dark"
+									onClick={async () => {
+										HandleEdits("/api/gdrive/archivefiles", "PUT");
+									}}
+								>
+									{isLoading ? "Archiving .." : "Archive Selected"}
+								</Button>
+							</div>
+						) : (
+							<div></div>
+						)}
+					</>
 				)}
 			</div>
 
