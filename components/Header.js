@@ -12,7 +12,7 @@ export default function Header() {
 				variant="light"
 				style={{ paddingRight: 0, paddingLeft: 0 }}
 			>
-				<Navbar.Brand href="#home">Web Gallary</Navbar.Brand>
+				<Navbar.Brand href="#home">Web Gallery</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav activeKey={router.pathname} className="ml-auto">
