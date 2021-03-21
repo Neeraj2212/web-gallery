@@ -14,9 +14,8 @@ export default async function hideMyFiles(request, response) {
 						addParents: "1CDG7aTbenX-kMK9Ar77aPJsrWpQTi8Ed", // Moving files from general to hidden folder
 						removeParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", // general folder id
 					});
-
-					response.json("Files Hidden Successfully");
 				});
+				response.json("Files Hidden Successfully");
 			} catch (error) {
 				response.status(400).json(error);
 			}

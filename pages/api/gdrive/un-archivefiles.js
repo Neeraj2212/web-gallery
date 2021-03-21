@@ -16,8 +16,8 @@ export default async function unarchivefiles(request, response) {
 					});
 
 					// console.log(result.data);
-					response.json("Files restored Successfully");
 				});
+				response.json("Files restored Successfully");
 			} catch (error) {
 				response.status(400).json(error);
 			}

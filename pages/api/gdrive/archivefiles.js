@@ -16,8 +16,8 @@ export default async function archivefiles(request, response) {
 					});
 
 					console.log(result.data);
-					response.json("Archived Successfully");
 				});
+				response.json("Archived Successfully");
 			} catch (error) {
 				response.status(400).json(error);
 			}

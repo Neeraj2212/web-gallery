@@ -14,9 +14,8 @@ export default async function unhideMyFiles(request, response) {
 						addParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", // Moving files from hidden to general folder
 						removeParents: "1CDG7aTbenX-kMK9Ar77aPJsrWpQTi8Ed", // hidden folder id
 					});
-
-					response.json("Files restored Successfully");
 				});
+				response.json("Files restored Successfully");
 			} catch (error) {
 				response.status(400).json(error);
 			}
