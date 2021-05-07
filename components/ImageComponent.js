@@ -8,20 +8,30 @@ export default function ImageComponent({
 	SelectedFiles,
 	setSelectedFiles,
 }) {
+	const aspectRatio =
+		file.imageMediaMetadata.width / file.imageMediaMetadata.height;
 	return (
 		<div
-			className="col-sm-6 col-md-4 col-lg-3 my-2 d-flex justify-content-center"
-			style={{ position: `relative` }}
+			// className="col-sm-6 col-md-4 col-lg-3 my-2 d-flex justify-content-center"
+			style={{
+				flexGrow: 1,
+				width: `${aspectRatio * 250}px`,
+
+				boxSizing: `border-box`,
+				position: "relative",
+			}}
 		>
-			<Image
-				className="img-fluid"
-				// src={`https://drive.google.com/uc?export=view&id=${props.id}`}
+			<img
 				src={`https://drive.google.com/thumbnail?id=${file.id}`} // Loading Thumbnails for fast Load
-				width="300"
-				height="300"
-				layout="intrinsic"
-				alt={file.name}
+				style={{
+					width: `100%`,
+					objectFit: `cover`,
+					padding: `8px`,
+					height: `100%`,
+				}}
+				loading="lazy"
 			/>
+
 			{showTicks ? (
 				<FormCheck
 					type="checkbox"
@@ -45,3 +55,14 @@ export default function ImageComponent({
 		</div>
 	);
 }
+
+// Extras
+// <Image
+// 	// className="img-fluid"
+// 	// src={`https://drive.google.com/uc?export=view&id=${props.id}`}
+// 	src={`https://drive.google.com/thumbnail?id=${file.id}`} // Loading Thumbnails for fast Load
+// 	width="300"
+// 	height="300"
+// 	layout="intrinsic"
+// 	alt={file.name}
+// />

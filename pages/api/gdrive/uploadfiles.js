@@ -15,44 +15,42 @@ export default async function UploadFiles(request, response) {
 		const session = await getSession({ req: request });
 		if (session) {
 			// Signed In
-			upload.array("files")(request, response, async (result) => {
-				if (result instanceof Error) {
-					return console.log(result);
-				}
+			try {
+				upload.array("files")(request, response, async (result) => {
+					if (result instanceof Error) {
+						return console.log(result);
+					}
 
-				const drive = google.drive({ version: "v3" });
-				const files = request.files;
+					const drive = google.drive({ version: "v3" });
+					const files = request.files;
 
-				for (let index = 0; index < files.length; index++) {
-					const file = files[index];
+					for (let index = 0; index < files.length; index++) {
+						const file = files[index];
 
-					sharp(file.buffer)
-						.resize(700)
-						.toBuffer()
-						.then(async (data) => {
-							const bufferStream = new stream.PassThrough();
-							bufferStream.end(data);
-							var media = {
-								mimeType: file.mimetype,
-								body: bufferStream,
-							};
-							const driveRes = await drive.files.create({
-								requestBody: {
-									name: file.originalname,
-									parents: ["1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM"],
-								},
-								media: media,
-								fields: "id,name",
-							});
-							console.log(driveRes.data);
-						})
-						.catch((err) => {
-							console.log(err);
+						const data = await sharp(file.buffer).resize(700).toBuffer();
+
+						const bufferStream = new stream.PassThrough();
+						bufferStream.end(data);
+						var media = {
+							mimeType: file.mimetype,
+							body: bufferStream,
+						};
+						const driveRes = await drive.files.create({
+							requestBody: {
+								name: file.originalname,
+								parents: ["1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM"],
+							},
+							media: media,
+							fields: "id,name",
 						});
-				}
-				console.log("Sending Response");
-				response.send("Upload Sucessfull");
-			});
+						console.log(driveRes.data);
+					}
+					console.log("Sending Response");
+					response.send("Upload Sucessfull");
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		} else {
 			// Not Signed In
 			response.status(401);

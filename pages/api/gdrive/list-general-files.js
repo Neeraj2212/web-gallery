@@ -6,7 +6,7 @@ export default function listGeneral(request, response) {
 		{
 			q: "'1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM' in parents", //general folder id
 			// fields: "*",
-			fields: "files(name,id)",
+			fields: "files(name,id,imageMediaMetadata)",
 		},
 		(err, res) => {
 			if (err) return console.log("The API returned an error: " + err);

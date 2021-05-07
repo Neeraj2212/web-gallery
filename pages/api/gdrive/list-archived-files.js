@@ -9,7 +9,7 @@ export default async function listArchived(request, response) {
 			{
 				q: "'1457wU7ZikBzk-0AufwhWaXGMzhZcfimU' in parents", // archived folder id
 				// fields: "*",
-				fields: "files(name,id)",
+				fields: "files(name,id,imageMediaMetadata)",
 			},
 			(err, res) => {
 				if (err) return console.log("The API returned an error: " + err);

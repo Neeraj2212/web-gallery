@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useSession } from "next-auth/client";
 import { Button } from "react-bootstrap";
 import ImageComponent from "./ImageComponent";
+import { useRouter } from "next/router";
 
 export default function ImageView(props) {
+	const router = useRouter();
 	const [session, loading] = useSession();
 	const [showTicks, setTicks] = useState(false);
 	const [hideFiles, btnHide] = useState(false);
@@ -25,7 +27,8 @@ export default function ImageView(props) {
 			})
 				.then(async (res) => {
 					alert(await res.text());
-					location.reload();
+
+					router.reload();
 				})
 				.catch((err) => {
 					console.log(err);
@@ -47,6 +50,7 @@ export default function ImageView(props) {
 									setTicks(!showTicks);
 									btnHide(!hideFiles);
 									setSelectedFiles([]);
+									console.log(location.pathname);
 								}}
 							>
 								Hide
@@ -124,7 +128,15 @@ export default function ImageView(props) {
 				)}
 			</div>
 
-			<div className="row">
+			<div
+				// className="row"
+				style={{
+					display: "flex",
+					flexWrap: "wrap",
+					flexGrow: 1,
+					flexDirection: "row",
+				}}
+			>
 				{props.files.map((file) => {
 					return (
 						<ImageComponent

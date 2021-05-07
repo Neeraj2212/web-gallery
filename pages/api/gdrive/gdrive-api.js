@@ -5,5 +5,6 @@ import listGeneral from "./list-general-files";
 export default function DriveApi(request, response) {
 	console.log("initializing Drive api");
 	authorize();
-	listGeneral(request, response);
+
+	return listGeneral(request, response);
 }
