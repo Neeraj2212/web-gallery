@@ -7,7 +7,7 @@ export default async function listHidden(request, response) {
 		const drive = google.drive({ version: "v3" });
 		drive.files.list(
 			{
-				q: "'1CDG7aTbenX-kMK9Ar77aPJsrWpQTi8Ed' in parents", // hidden folder id
+				q: `'${process.env.HIDDEN_FOLDER}' in parents`, // hidden folder id
 				// fields: "*",
 				fields: "files(name,id,imageMediaMetadata)",
 			},

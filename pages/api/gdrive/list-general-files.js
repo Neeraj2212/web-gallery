@@ -4,7 +4,7 @@ export default function listGeneral(request, response) {
 	const drive = google.drive({ version: "v3" });
 	drive.files.list(
 		{
-			q: "'1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM' in parents", //general folder id
+			q: `'${process.env.MAIN_FOLDER}' in parents`, //general folder id
 			// fields: "*",
 			fields: "files(name,id,imageMediaMetadata)",
 		},

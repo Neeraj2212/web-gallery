@@ -12,8 +12,8 @@ export default async function unarchivefiles(request, response) {
 					const file = files[i];
 					const result = await drive.files.update({
 						fileId: file,
-						addParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", //   Moving files from archive to general folder
-						removeParents: "1457wU7ZikBzk-0AufwhWaXGMzhZcfimU", // arhieve folder id
+						addParents: `${process.env.MAIN_FOLDER}`, //   Moving files from archive to general folder
+						removeParents: `${process.env.ARCHIVED_FOLDER}`, // arhieve folder id
 					});
 				}
 

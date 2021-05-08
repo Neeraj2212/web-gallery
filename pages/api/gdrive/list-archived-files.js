@@ -7,7 +7,7 @@ export default async function listArchived(request, response) {
 		const drive = google.drive({ version: "v3" });
 		drive.files.list(
 			{
-				q: "'1457wU7ZikBzk-0AufwhWaXGMzhZcfimU' in parents", // archived folder id
+				q: `'${process.env.ARCHIVED_FOLDER}' in parents`, // archived folder id
 				// fields: "*",
 				fields: "files(name,id,imageMediaMetadata)",
 			},

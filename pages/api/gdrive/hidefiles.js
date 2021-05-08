@@ -12,8 +12,8 @@ export default async function hideMyFiles(request, response) {
 					const file = files[i];
 					const result = await drive.files.update({
 						fileId: file,
-						addParents: "1CDG7aTbenX-kMK9Ar77aPJsrWpQTi8Ed", // Moving files from general to hidden folder
-						removeParents: "1Yh2cGay35MJ7wwYuPqZnbK_XwydgkZqM", // general folder id
+						addParents: `${process.env.HIDDEN_FOLDER}`, // Moving files from general to hidden folder
+						removeParents: `${process.env.MAIN_FOLDER}`, // general folder id
 					});
 				}
 
