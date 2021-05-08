@@ -2,11 +2,15 @@ import { google } from "googleapis";
 import readline from "readline";
 
 export const authorize = () => {
-	const TOKEN_PATH = JSON.parse(process.env.TOKEN);
+	const TOKEN_PATH = {
+		access_token: process.env.ACCESS_TOKEN,
+		refresh_token: process.env.REFRESH_TOKEN,
+		expiry_date: process.env.EXPIRY_DATE,
+	};
 	const SCOPES = ["https://www.googleapis.com/auth/drive"];
 	const client_id = process.env.DB_FOLDER_CLIENT_ID;
 	const client_secret = process.env.DB_FOLDER_CLIENT_SECRET;
-	const redirect_uris = JSON.parse(process.env.REDIRECT_URIS);
+	const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob"];
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
 		client_secret,
