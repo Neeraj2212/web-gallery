@@ -29,10 +29,12 @@ export default function Home({ files }) {
 }
 
 export async function getServerSideProps({ req, res }) {
+  const session = await getSession()
   const resfiles =
-    (await (await fetch(`${process.env.NEXTAUTH_URL}/api/gdrive/gdrive-api`)).json()) ||
-    []
+    (await (
+      await fetch(`${process.env.NEXTAUTH_URL}/api/gdrive/gdrive-api`)
+    ).json()) || []
   return {
-    props: { files: resfiles },
+    props: { session, files: resfiles },
   }
 }
