@@ -65,6 +65,7 @@ export default function ArchivedImageView(props) {
           <div className=" ml-auto mr-3">
             <Button
               variant="success"
+              disabled={isLoading}
               onClick={() => {
                 HandleEdits("/api/gdrive/un-archivefiles", "PUT")
               }}

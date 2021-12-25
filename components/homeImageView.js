@@ -104,6 +104,7 @@ export default function ImageView(props) {
               <div className=" ml-auto mr-3">
                 <Button
                   variant="success"
+                  disabled={isLoading}
                   onClick={() => {
                     HandleEdits("/api/gdrive/hidefiles", "PUT")
                   }}
@@ -118,6 +119,7 @@ export default function ImageView(props) {
               <div className=" ml-auto mr-3">
                 <Button
                   variant="danger"
+                  disabled={isLoading}
                   onClick={() => {
                     HandleEdits("/api/gdrive/deletefiles", "DELETE")
                   }}
@@ -132,6 +134,7 @@ export default function ImageView(props) {
               <div className=" ml-auto mr-3">
                 <Button
                   variant="dark"
+                  disabled={isLoading}
                   onClick={async () => {
                     HandleEdits("/api/gdrive/archivefiles", "PUT")
                   }}

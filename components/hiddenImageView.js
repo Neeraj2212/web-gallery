@@ -64,6 +64,7 @@ export default function HiddenImageView(props) {
           <div className=" ml-auto mr-3">
             <Button
               variant="success"
+              disabled={isLoading}
               onClick={() => {
                 HandleEdits("/api/gdrive/un-hidefiles", "PUT")
               }}

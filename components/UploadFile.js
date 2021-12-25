@@ -7,6 +7,10 @@ export default function UploadFiles() {
   const [acceptedFiles, setAcceptedFiles] = useState([])
   const [isLoading, setLoading] = useState(false)
   const refreshData = useRefreshData()
+  const resetToInitialState = () => {
+    setLoading(false)
+    setShow(false)
+  }
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -22,6 +26,7 @@ export default function UploadFiles() {
     })
       .then(async (res) => {
         alert(await res.text())
+        resetToInitialState()
         refreshData()
       })
       .catch((error) => {
@@ -55,6 +60,7 @@ export default function UploadFiles() {
             <div className="mt-2 d-flex justify-content-end">
               <Button
                 type="submit"
+                disabled={isLoading}
                 onClick={() => {
                   setLoading(true)
                 }}
