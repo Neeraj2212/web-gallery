@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/custom-hooks/*": ["lib/custom-hooks/*"],
+      "@/components/*": ["components/*"],
+      "@/api/*": ["pages/api/*"]
+    }
+  }
+}

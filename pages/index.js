@@ -1,41 +1,38 @@
-import { useEffect, useState } from "react";
-import Header from "./../components/Header";
-import UploadFiles from "../components/UploadFile";
-import ImageView from "./../components/homeImageView";
-import { useRouter } from "next/router";
-import { useSession, getSession } from "next-auth/client";
+import { useEffect, useState } from "react"
 
-export default function Home() {
-	const [session, loading] = useSession();
-	const router = useRouter();
-	const [files, setFiles] = useState([]);
+import UploadFiles from "../components/UploadFile"
+import ImageView from "./../components/homeImageView"
+import { useRouter } from "next/router"
+import { useSession, getSession } from "next-auth/client"
 
-	useEffect(() => {
-		loadData();
-		router.prefetch("/hiddenfiles");
-	}, []);
+export default function Home({ files }) {
+  const [session, loading] = useSession()
+  const router = useRouter()
 
-	const loadData = async () => {
-		const resfiles = await (await fetch("api/gdrive/gdrive-api")).json();
-		setFiles(resfiles);
-	};
+  console.log("Files loaded " + files.length)
+  return (
+    <div>
+      <ImageView files={files} />
+      {session && (
+        <div
+          style={{
+            position: `fixed`,
+            bottom: `25px`,
+            right: `25px`,
+          }}
+        >
+          <UploadFiles />
+        </div>
+      )}
+    </div>
+  )
+}
 
-	console.log("Files loaded " + files.length);
-	return (
-		<div>
-			<Header />
-			<ImageView files={files} />
-			{session && (
-				<div
-					style={{
-						position: `fixed`,
-						bottom: `25px`,
-						right: `25px`,
-					}}
-				>
-					<UploadFiles />
-				</div>
-			)}
-		</div>
-	);
+export async function getServerSideProps({ req, res }) {
+  const resfiles =
+    (await (await fetch(`${process.env.SITE}/api/gdrive/gdrive-api`)).json()) ||
+    []
+  return {
+    props: { files: resfiles },
+  }
 }
