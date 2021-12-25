@@ -1,11 +1,13 @@
 import { useState } from "react"
 
 import { Button } from "react-bootstrap"
+import { toast } from "react-toastify"
 import ImageComponent from "./ImageComponent"
 
 export default function ArchivedImageView(props) {
   const [showTicks, setTicks] = useState(false)
   const [unarchivefiles, btnUnarchive] = useState(false)
+  toast.configure()
 
   const [SelectedFiles, setSelectedFiles] = useState([])
   const [isLoading, setLoading] = useState(false)
@@ -28,11 +30,12 @@ export default function ArchivedImageView(props) {
         body: JSON.stringify(SelectedFiles),
       })
         .then(async (res) => {
-          alert(await res.text())
+          toast.success(await res.text())
           props.loadData()
           resetToInitialState()
         })
         .catch((err) => {
+          toast.error(err.message)
           console.log(err)
         })
     }

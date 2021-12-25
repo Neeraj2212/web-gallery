@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import { Button } from "react-bootstrap"
+import { toast } from "react-toastify"
 import ImageComponent from "./ImageComponent"
 
 export default function HiddenImageView(props) {
@@ -8,6 +9,7 @@ export default function HiddenImageView(props) {
   const [unhidefiles, btnUnhide] = useState(false)
   const [SelectedFiles, setSelectedFiles] = useState([])
   const [isLoading, setLoading] = useState(false)
+  toast.configure()
 
   const resetToInitialState = () => {
     setLoading(false)
@@ -26,12 +28,13 @@ export default function HiddenImageView(props) {
         body: JSON.stringify(SelectedFiles),
       })
         .then(async (res) => {
-          alert(await res.text())
+          toast.success(await res.text())
           props.loadData()
           resetToInitialState()
         })
 
         .catch((err) => {
+          toast.error(err.message)
           console.log(err)
         })
     }

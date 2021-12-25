@@ -1,6 +1,7 @@
 import Header from "./../components/Header"
 import "../styles/globals.css"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "react-toastify/dist/ReactToastify.min.css"
 
 import { getSession, Provider } from "next-auth/client"
 

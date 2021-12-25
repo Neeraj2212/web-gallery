@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Modal, Button, Form } from "react-bootstrap"
 import useRefreshData from "@/custom-hooks/refresh"
+import { toast } from "react-toastify"
 
 export default function UploadFiles() {
   const [show, setShow] = useState(false)
@@ -11,6 +12,7 @@ export default function UploadFiles() {
     setLoading(false)
     setShow(false)
   }
+  toast.configure()
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -25,11 +27,12 @@ export default function UploadFiles() {
       body: data,
     })
       .then(async (res) => {
-        alert(await res.text())
+        toast.success(await res.text())
         resetToInitialState()
         refreshData()
       })
       .catch((error) => {
+        toast.error(error.message)
         console.log(error)
       })
   }

@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap"
 import ImageComponent from "./ImageComponent"
 import { useRouter } from "next/router"
 import useRefreshData from "@/custom-hooks/refresh"
+import { toast } from "react-toastify"
 
 export default function ImageView(props) {
   const router = useRouter()
@@ -15,6 +16,7 @@ export default function ImageView(props) {
   const [SelectedFiles, setSelectedFiles] = useState([])
   const [isLoading, setLoading] = useState(false)
   const refreshData = useRefreshData(false)
+  toast.configure()
 
   const resetToInitialState = () => {
     setLoading(false)
@@ -37,11 +39,12 @@ export default function ImageView(props) {
         body: JSON.stringify(SelectedFiles),
       })
         .then(async (res) => {
-          alert(await res.text())
+          toast.success(await res.text())
           refreshData()
           resetToInitialState()
         })
         .catch((err) => {
+          // toast.error(err.message)
           console.log(err)
         })
     }
