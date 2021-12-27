@@ -159,6 +159,8 @@ export default function ImageView(props) {
           flexWrap: "wrap",
           flexGrow: 1,
           flexDirection: "row",
+          marginTop: "1.5rem",
+          gap: "8px",
         }}
       >
         {props.files.map((file) => {

@@ -81,7 +81,16 @@ export default function ArchivedImageView(props) {
         )}
       </div>
 
-      <div className="row">
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexGrow: 1,
+          flexDirection: "row",
+          marginTop: "1.5rem",
+          gap: "8px",
+        }}
+      >
         {props.files.map((file) => {
           return (
             <ImageComponent

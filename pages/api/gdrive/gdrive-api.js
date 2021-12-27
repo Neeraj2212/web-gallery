@@ -7,6 +7,7 @@ export default function DriveApi(request, response) {
   authorize()
     .then(() => {
       listGeneral(request, response)
+      return
     })
     .catch((err) => err.message)
 }

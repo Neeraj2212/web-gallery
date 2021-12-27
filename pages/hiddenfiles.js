@@ -1,5 +1,5 @@
 import HiddenImageView from "./../components/hiddenImageView"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useSession } from "next-auth/client"
 
 export default function HiddenFiles() {

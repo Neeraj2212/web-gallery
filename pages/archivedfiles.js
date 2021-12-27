@@ -1,5 +1,5 @@
 import ArchivedImageView from "../components/archiveImageView"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useSession } from "next-auth/client"
 
 export default function ArchivedFiles() {
@@ -14,6 +14,7 @@ export default function ArchivedFiles() {
     const resfiles = await (
       await fetch("api/gdrive/list-archived-files")
     ).json()
+    console.log(resfiles)
     setFiles(resfiles)
   }
 
