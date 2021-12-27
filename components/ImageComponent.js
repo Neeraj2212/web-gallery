@@ -19,6 +19,16 @@ export default function ImageComponent({
         gap: "8px",
         boxSizing: `border-box`,
         position: "relative",
+        cursor: showTicks ? "pointer" : "auto",
+      }}
+      onClick={() => {
+        if (showTicks) {
+          setSelectedFiles(
+            SelectedFiles.includes(file.id)
+              ? SelectedFiles.filter((i) => i !== file.id) // remove item
+              : [...SelectedFiles, file.id] // add item
+          )
+        }
       }}
     >
       <img
@@ -36,13 +46,14 @@ export default function ImageComponent({
         <FormCheck
           type="checkbox"
           name="hide"
-          onChange={() => {
-            setSelectedFiles(
-              SelectedFiles.includes(file.id)
-                ? SelectedFiles.filter((i) => i !== file.id) // remove item
-                : [...SelectedFiles, file.id] // add item
-            )
-          }}
+          checked={SelectedFiles.includes(file.id)}
+          // onChange={() => {
+          //   setSelectedFiles(
+          //     SelectedFiles.includes(file.id)
+          //       ? SelectedFiles.filter((i) => i !== file.id) // remove item
+          //       : [...SelectedFiles, file.id] // add item
+          //   )
+          // }}
           style={{
             position: `absolute`,
             right: "35px",
